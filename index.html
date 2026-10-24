@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#17130f">
+    <meta name="description" content="Discover your signature scent at Bosslady Cosmetics Scent Bar. Pure fragrance, made for every occasion.">
+    <title>Bosslady Cosmetics | Scent Bar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17130f;
+        --cream: #eee8dc;
+        --paper: #f5f1e8;
+        --gold: #bd9852;
+        --muted: #70695e;
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "DM Sans", Arial, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); }
+      a { color: inherit; }
+      button { font: inherit; }
+      .announcement { padding: 10px 20px; background: var(--ink); color: #f7edda; text-align: center; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+      .announcement span { color: #e0bf7d; }
+      .site-header { position: relative; z-index: 5; background: var(--paper); }
+      .nav { width: min(1160px, calc(100% - 48px)); height: 86px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+      .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; }
+      .brand-mark { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font-family: var(--serif); font-size: 22px; }
+      .brand-copy { display: grid; gap: 3px; }
+      .brand-name { font-family: var(--serif); font-size: 17px; letter-spacing: .13em; }
+      .brand-sub { color: var(--muted); font-size: 8px; letter-spacing: .25em; text-transform: uppercase; }
+      .nav-links { display: flex; align-items: center; gap: 34px; }
+      .nav-links a { text-decoration: none; font-size: 12px; color: #514b43; }
+      .nav-links a:hover { color: #9a7433; }
+      .nav-links .nav-cta { padding: 12px 18px; border: 1px solid var(--ink); color: var(--ink); transition: .2s ease; }
+      .nav-links .nav-cta:hover { background: var(--ink); color: white; }
+      .menu-toggle { display: none; border: 0; background: none; color: var(--ink); font-size: 24px; cursor: pointer; }
+
+      .hero { overflow: hidden; background: var(--cream); }
+      .hero-inner { width: min(1160px, calc(100% - 48px)); min-height: 590px; margin: auto; display: grid; grid-template-columns: 1fr .88fr; align-items: center; gap: 42px; }
+      .hero-copy { padding: 70px 0 78px; position: relative; z-index: 1; }
+      .eyebrow { display: inline-flex; align-items: center; gap: 12px; color: #8a6a31; font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+      .eyebrow::before { width: 28px; height: 1px; content: ""; background: var(--gold); }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 590px; margin: 23px 0 18px; font-family: var(--serif); font-size: clamp(48px, 6.2vw, 78px); font-weight: 500; letter-spacing: -.045em; line-height: 1.02; }
+      h1 em { color: #a77e39; font-weight: 500; }
+      .hero-copy > p { max-width: 470px; margin-bottom: 30px; color: #655e53; font-size: 15px; line-height: 1.85; }
+      .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+      .button { min-height: 48px; padding: 0 21px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 12px; font-weight: 600; transition: transform .2s ease, background .2s ease; }
+      .button:hover { transform: translateY(-2px); }
+      .button-dark { background: var(--ink); color: white; }
+      .button-dark:hover { background: #33271a; }
+      .button-outline { border: 1px solid #bdb2a0; color: var(--ink); }
+      .hero-note { margin-top: 30px; display: flex; align-items: center; gap: 12px; color: #797064; font-size: 11px; letter-spacing: .04em; }
+      .hero-note::before { width: 31px; height: 1px; content: ""; background: var(--gold); }
+      .hero-art { min-height: 478px; position: relative; display: grid; place-items: center; }
+      .hero-disc { width: min(410px, 100%); aspect-ratio: 1; position: absolute; border: 1px solid rgba(189, 152, 82, .45); border-radius: 50%; }
+      .hero-disc::before, .hero-disc::after { position: absolute; border: 1px solid rgba(189, 152, 82, .23); border-radius: 50%; content: ""; }
+      .hero-disc::before { inset: 18px; }
+      .hero-disc::after { inset: 38px; }
+      .sparkle { position: absolute; color: var(--gold); font-size: 20px; }
+      .sparkle-one { top: 10%; right: 17%; }
+      .sparkle-two { left: 9%; bottom: 19%; font-size: 13px; }
+      .bottle { width: 176px; height: 245px; position: relative; z-index: 1; border: 1px solid rgba(138, 101, 44, .6); border-radius: 24px 24px 30px 30px; background: linear-gradient(90deg, rgba(255,255,255,.85), rgba(247,226,178,.54) 25%, rgba(255,255,255,.86) 50%, rgba(212,173,103,.45) 80%, rgba(255,255,255,.8)); box-shadow: 0 26px 55px rgba(78, 57, 27, .2), inset 0 0 20px rgba(255,255,255,.9); transform: rotate(-5deg); }
+      .bottle::before { width: 76px; height: 37px; position: absolute; left: 50%; top: -37px; border: 1px solid rgba(129, 92, 38, .7); border-bottom: 0; border-radius: 8px 8px 0 0; background: linear-gradient(90deg, #8d672f, #e2c581 40%, #9c7438); content: ""; transform: translateX(-50%); }
+      .bottle::after { position: absolute; inset: 62px 18px 34px; border: 1px solid rgba(210, 176, 103, .65); background: rgba(28, 23, 17, .96); content: ""; }
+      .bottle-label { position: absolute; z-index: 2; inset: 93px 22px auto; color: #e8d3a2; text-align: center; }
+      .bottle-label .crown { display: block; font-size: 15px; }
+      .bottle-label strong { display: block; margin: 9px 0 5px; font-family: var(--serif); font-size: 15px; letter-spacing: .08em; }
+      .bottle-label small { font-size: 7px; letter-spacing: .18em; }
+      .bottle-glow { width: 245px; height: 28px; position: absolute; z-index: 0; bottom: 80px; border-radius: 50%; background: rgba(180, 140, 70, .19); filter: blur(15px); }
+      .hero-caption { position: absolute; right: 1%; bottom: 7%; color: #806c48; font-family: var(--serif); font-size: 14px; font-style: italic; transform: rotate(-8deg); }
+
+      .benefits { background: var(--ink); color: #fffaf0; }
+      .benefit-grid { width: min(1160px, calc(100% - 48px)); min-height: 128px; margin: auto; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; }
+      .benefit { min-height: 56px; padding: 0 18px; display: flex; align-items: center; justify-content: center; gap: 12px; border-right: 1px solid rgba(255,255,255,.15); }
+      .benefit:first-child { padding-left: 0; }
+      .benefit:last-child { padding-right: 0; border-right: 0; }
+      .benefit-icon { color: #d6b66d; font-size: 21px; }
+      .benefit span:last-child { color: #eee7d9; font-size: 11px; line-height: 1.5; letter-spacing: .04em; }
+
+      .section { padding: 100px 24px; }
+      .section-inner { width: min(1080px, 100%); margin: auto; }
+      .section-heading { max-width: 590px; margin: 0 auto 48px; text-align: center; }
+      .section-heading .eyebrow { justify-content: center; }
+      h2 { margin: 15px 0 13px; font-family: var(--serif); font-size: clamp(36px, 4.4vw, 52px); font-weight: 500; letter-spacing: -.035em; line-height: 1.12; }
+      .section-heading p { margin-bottom: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+      .scent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .scent-card { min-height: 310px; padding: 26px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; background: #f4eee2; }
+      .scent-card:nth-child(2) { background: #eeeadf; }
+      .scent-card:nth-child(3) { background: #e9e2d4; }
+      .scent-art { position: absolute; inset: 0 0 82px; display: grid; place-items: center; }
+      .mini-bottle { width: 92px; height: 125px; position: relative; border: 1px solid rgba(146, 107, 50, .6); border-radius: 12px 12px 17px 17px; background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(228,204,155,.5), rgba(255,255,255,.82)); box-shadow: 0 16px 26px rgba(65,47,24,.15); }
+      .mini-bottle::before { width: 38px; height: 21px; position: absolute; left: 50%; top: -21px; border-radius: 4px 4px 0 0; background: linear-gradient(90deg,#84602e,#d9ba73,#8c6732); content: ""; transform: translateX(-50%); }
+      .mini-bottle::after { position: absolute; inset: 39px 9px 21px; border: 1px solid rgba(206,171,99,.6); background: #211b14; content: ""; }
+      .mini-label { position: absolute; z-index: 1; top: 56px; left: 0; width: 100%; color: #e8d3a2; text-align: center; font-family: var(--serif); font-size: 10px; letter-spacing: .08em; }
+      .scent-card h3 { position: relative; margin: 0 0 5px; font-family: var(--serif); font-size: 24px; font-weight: 500; }
+      .scent-card p { position: relative; margin: 0; color: #746b5d; font-size: 11px; line-height: 1.6; }
+      .card-link { position: absolute; right: 22px; bottom: 26px; color: #80632f; font-size: 20px; text-decoration: none; }
+
+      .poster-section { padding: 92px 24px; background: var(--cream); }
+      .poster-layout { width: min(1000px, 100%); margin: auto; display: grid; grid-template-columns: .85fr 1fr; align-items: center; gap: 76px; }
+      .poster-copy h2 { max-width: 400px; }
+      .poster-copy > p { max-width: 400px; color: var(--muted); font-size: 14px; line-height: 1.85; }
+      .poster-frame { padding: 12px; background: var(--paper); box-shadow: 0 24px 65px rgba(50, 38, 19, .16); transform: rotate(1deg); }
+      .poster-frame img { width: 100%; height: auto; display: block; }
+      .contact { padding: 78px 24px; background: #1c1813; color: #fffaf0; text-align: center; }
+      .contact .eyebrow { color: #d9bb79; }
+      .contact h2 { margin: 16px 0 11px; }
+      .contact p { margin-bottom: 24px; color: #c8c0b3; font-size: 14px; }
+      .contact .button { background: #d4b56f; color: #1b1711; }
+      .contact .button:hover { background: #e3ca91; }
+      .contact-details { margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px; color: #e0d8ca; font-size: 12px; }
+      .contact-details a { text-decoration: none; }
+      .site-footer { padding: 22px 24px; background: #15120e; color: #aaa193; text-align: center; font-size: 10px; letter-spacing: .06em; }
+      .site-footer p { margin: 0; }
+      .site-footer span { color: #cfad64; }
+      :focus-visible { outline: 2px solid #b4873d; outline-offset: 4px; }
+
+      @media (max-width: 760px) {
+        .announcement { font-size: 9px; }
+        .nav { width: calc(100% - 36px); height: 72px; }
+        .menu-toggle { display: block; }
+        .nav-links { position: absolute; top: 72px; left: 0; right: 0; padding: 15px 24px 22px; display: none; flex-direction: column; align-items: stretch; gap: 0; background: var(--paper); box-shadow: 0 14px 18px rgba(23,19,15,.1); }
+        .nav-links.is-open { display: flex; }
+        .nav-links a { padding: 13px 3px; }
+        .nav-links .nav-cta { margin-top: 7px; text-align: center; }
+        .hero-inner { width: calc(100% - 40px); min-height: auto; grid-template-columns: 1fr; gap: 0; }
+        .hero-copy { padding: 63px 0 0; }
+        h1 { max-width: 500px; font-size: clamp(48px, 12vw, 68px); }
+        .hero-copy > p { font-size: 14px; }
+        .hero-art { min-height: 365px; margin-top: 4px; }
+        .hero-disc { width: min(320px, 88%); }
+        .bottle { transform: scale(.83) rotate(-5deg); }
+        .bottle-glow { bottom: 53px; }
+        .benefit-grid { width: calc(100% - 32px); padding: 18px 0; grid-template-columns: 1fr 1fr; }
+        .benefit { min-height: 65px; padding: 8px 10px; justify-content: flex-start; border-right: 0; }
+        .benefit:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.15); }
+        .benefit:first-child { padding-left: 10px; }
+        .benefit:last-child { padding-right: 10px; }
+        .section { padding: 76px 20px; }
+        .section-heading { margin-bottom: 34px; }
+        .scent-grid { grid-template-columns: 1fr; gap: 13px; }
+        .scent-card { min-height: 275px; }
+        .scent-art { bottom: 70px; }
+        .poster-section { padding: 72px 20px; }
+        .poster-layout { grid-template-columns: 1fr; gap: 35px; }
+        .poster-copy { text-align: center; }
+        .poster-copy .eyebrow { justify-content: center; }
+        .poster-copy h2, .poster-copy > p { margin-left: auto; margin-right: auto; }
+        .poster-copy .actions { justify-content: center; }
+        .poster-frame { width: min(440px, 100%); margin: auto; }
+        .contact { padding: 68px 20px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="announcement">A little luxury, every day <span>·</span> Find your signature scent</div>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="Bosslady Cosmetics home">
+          <span class="brand-mark" aria-hidden="true">B</span>
+          <span class="brand-copy">
+            <span class="brand-name">BOSSLADY</span>
+            <span class="brand-sub">Cosmetics · Scent Bar</span>
+          </span>
+        </a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
+        <div class="nav-links" id="nav-links">
+          <a href="#scents">The scent bar</a>
+          <a href="#about">Our story</a>
+          <a href="#poster">The poster</a>
+          <a class="nav-cta" href="#contact">Get in touch</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Bosslady Cosmetics Scent Bar</span>
+            <h1>Leave an <em>impression</em> that lasts.</h1>
+            <p>Find a fragrance that feels like you. Explore the Bosslady Scent Bar and make every entrance a little more unforgettable.</p>
+            <div class="actions">
+              <a class="button button-dark" href="https://wa.me/27673951408?text=Hi%20Bosslady%2C%20I%27d%20love%20to%20discover%20my%20signature%20scent.">Discover your scent <span aria-hidden="true">↗</span></a>
+              <a class="button button-outline" href="#scents">Explore the scent bar</a>
+            </div>
+            <div class="hero-note">Pure fragrance aura, made for you</div>
+          </div>
+          <div class="hero-art" aria-label="Illustration of a Bosslady perfume bottle">
+            <div class="hero-disc" aria-hidden="true"></div>
+            <span class="sparkle sparkle-one" aria-hidden="true">✦</span>
+            <span class="sparkle sparkle-two" aria-hidden="true">✧</span>
+            <div class="bottle-glow" aria-hidden="true"></div>
+            <div class="bottle" aria-hidden="true">
+              <div class="bottle-label"><span class="crown">♛</span><strong>BOSSLADY</strong><small>PURE FRAGRANCE</small></div>
+            </div>
+            <div class="hero-caption">Find your aura</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="benefits" aria-label="What makes Bosslady special">
+        <div class="benefit-grid">
+          <div class="benefit"><span class="benefit-icon" aria-hidden="true">♧</span><span>Premium<br>fragrances</span></div>
+          <div class="benefit"><span class="benefit-icon" aria-hidden="true">◇</span><span>Long-lasting<br>scents</span></div>
+          <div class="benefit"><span class="benefit-icon" aria-hidden="true">✧</span><span>Pure &amp;<br>quality</span></div>
+          <div class="benefit"><span class="benefit-icon" aria-hidden="true">♕</span><span>Perfect for every<br>occasion</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="scents">
+        <div class="section-inner">
+          <div class="section-heading">
+            <span class="eyebrow">The scent bar</span>
+            <h2>Which one feels like you?</h2>
+            <p>From your everyday signature to a scent for a special moment, there’s a little Bosslady magic waiting for you.</p>
+          </div>
+          <div class="scent-grid">
+            <article class="scent-card">
+              <div class="scent-art" aria-hidden="true"><div class="mini-bottle"><span class="mini-label">PURE</span></div></div>
+              <h3>Pure</h3>
+              <p>For the moments you want to feel effortlessly you.</p>
+              <a class="card-link" aria-label="Ask about Pure fragrance on WhatsApp" href="https://wa.me/27673951408?text=Hi%20Bosslady%2C%20tell%20me%20about%20Pure.">↗</a>
+            </article>
+            <article class="scent-card">
+              <div class="scent-art" aria-hidden="true"><div class="mini-bottle"><span class="mini-label">AURA</span></div></div>
+              <h3>Aura</h3>
+              <p>A little extra presence, wherever the day takes you.</p>
+              <a class="card-link" aria-label="Ask about Aura fragrance on WhatsApp" href="https://wa.me/27673951408?text=Hi%20Bosslady%2C%20tell%20me%20about%20Aura.">↗</a>
+            </article>
+            <article class="scent-card">
+              <div class="scent-art" aria-hidden="true"><div class="mini-bottle"><span class="mini-label">BOSSLADY</span></div></div>
+              <h3>Bosslady</h3>
+              <p>Make your entrance. Leave an impression that lasts.</p>
+              <a class="card-link" aria-label="Ask about Bosslady fragrance on WhatsApp" href="https://wa.me/27673951408?text=Hi%20Bosslady%2C%20tell%20me%20about%20the%20Bosslady%20fragrance.">↗</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="poster-section" id="about">
+        <div class="poster-layout">
+          <div class="poster-copy">
+            <span class="eyebrow">Made for bossladies</span>
+            <h2>Embrace your aura.</h2>
+            <p>Bosslady Cosmetics Scent Bar is all about pure fragrance, confidence, and finding a scent that’s yours. Whether it’s a gift or a treat for yourself, let your fragrance do the talking.</p>
+            <div class="actions">
+              <a class="button button-dark" href="https://wa.me/27673951408?text=Hi%20Bosslady%2C%20I%27d%20like%20to%20ask%20about%20your%20fragrances.">Let’s find your scent <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="poster-frame" id="poster">
+            <img src="assets/bosslady-poster.jpg" alt="Bosslady Cosmetics Scent Bar promotional poster featuring the brand, fragrance bottles, and contact details">
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <span class="eyebrow">Your next signature scent</span>
+        <h2>Let’s find your fragrance.</h2>
+        <p>Message Bosslady and discover the scent that feels like you.</p>
+        <a class="button" href="https://wa.me/27673951408?text=Hi%20Bosslady%2C%20I%27d%20love%20to%20find%20my%20signature%20scent.">Chat with us on WhatsApp <span aria-hidden="true">↗</span></a>
+        <div class="contact-details">
+          <a href="tel:+27673951408">+27 67 395 1408</a>
+          <span>241 Voortrekker</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><span>BOSSLADY COSMETICS</span> · SCENT BAR · Embrace your aura. Leave an impression that lasts.</p>
+    </footer>
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+        navLinks.classList.toggle("is-open", !isOpen);
+      });
+
+      navLinks.addEventListener("click", (event) => {
+        if (event.target instanceof HTMLAnchorElement) {
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Open navigation");
+          navLinks.classList.remove("is-open");
+        }
+      });
+    </script>
+  </body>
+</html>
