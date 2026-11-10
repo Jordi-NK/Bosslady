@@ -110,6 +110,52 @@
       .poster-copy > p { max-width: 400px; color: var(--muted); font-size: 14px; line-height: 1.85; }
       .poster-frame { padding: 12px; background: var(--paper); box-shadow: 0 24px 65px rgba(50, 38, 19, .16); transform: rotate(1deg); }
       .poster-frame img { width: 100%; height: auto; display: block; }
+
+      .immersive-gallery { padding: 0 24px 90px; background: var(--paper); }
+      .immersive-inner { width: min(1100px, 100%); margin: auto; }
+      .gallery-header { max-width: 620px; margin: 0 auto 34px; text-align: center; }
+      .gallery-header .eyebrow { justify-content: center; }
+      .gallery-grid { display: grid; grid-template-columns: 1.05fr 1fr 1fr; gap: 18px; }
+      .gallery-card { position: relative; overflow: hidden; min-height: 300px; border-radius: 24px; box-shadow: 0 24px 50px rgba(38, 26, 18, .12); }
+      .gallery-card img { width: 100%; height: 100%; display: block; object-fit: cover; filter: saturate(1.05) contrast(1.04); transition: transform .5s ease; }
+      .gallery-card:hover img { transform: scale(1.04); }
+      .gallery-card--tall { grid-row: span 2; min-height: 620px; }
+      .gallery-card--wide { grid-column: span 2; min-height: 290px; }
+      .gallery-overlay { position: absolute; inset: auto 0 0; padding: 22px 20px 18px; background: linear-gradient(180deg, rgba(17, 12, 10, 0), rgba(17, 12, 10, .82)); color: #f6edda; }
+      .gallery-overlay strong { display: block; margin-bottom: 4px; font-size: 16px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+      .gallery-overlay span { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.76); }
+
+      .review-station { padding: 0 24px 90px; background: #f4eadc; }
+      .review-inner { width: min(1100px, 100%); margin: auto; display: grid; grid-template-columns: .96fr 1.04fr; gap: 24px; align-items: start; }
+      .review-copy { padding: 26px 0; }
+      .review-copy h2 { max-width: 440px; }
+      .review-copy > p { max-width: 420px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+      .review-stats { list-style: none; padding: 0; margin: 26px 0 0; display: grid; grid-template-columns: repeat(3, minmax(100px, 1fr)); gap: 12px; }
+      .review-stats li { padding: 18px 16px; background: rgba(255,255,255,.4); border: 1px solid rgba(118, 91, 46, .2); border-radius: 16px; }
+      .review-stats strong { display: block; font-family: var(--serif); font-size: clamp(22px, 3vw, 32px); color: #7d5b27; }
+      .review-stats span { display: block; margin-top: 3px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+      .review-panel { padding: 18px; background: rgba(255,255,255,.52); border: 1px solid rgba(138, 101, 44, .18); border-radius: 26px; box-shadow: 0 22px 40px rgba(46, 35, 20, .08); }
+      .review-list { display: grid; gap: 14px; }
+      .review-card { padding: 18px 18px 16px; border-radius: 18px; background: rgba(255,255,255,.72); border: 1px solid rgba(181, 153, 98, .28); }
+      .review-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+      .review-author { font-size: 13px; font-weight: 700; letter-spacing: .03em; }
+      .review-product { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #7d5b27; }
+      .review-stars { color: #d8a94f; letter-spacing: 2px; font-size: 12px; }
+      .review-card p { margin: 0; color: #544e46; font-size: 13px; line-height: 1.7; }
+
+      .review-form-wrap { width: min(1100px, 100%); margin: 28px auto 0; }
+      .review-form { padding: 22px 24px; border-radius: 24px; background: #1a1410; color: #f4efe8; box-shadow: 0 24px 46px rgba(30, 22, 15, .18); }
+      .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .review-form label { display: grid; gap: 8px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #dbc280; }
+      .review-form input, .review-form select, .review-form textarea { width: 100%; border: 1px solid rgba(204, 176, 112, .35); border-radius: 12px; background: rgba(255,255,255,.04); color: #fffaf0; font: inherit; padding: 12px 14px; }
+      .review-form textarea { min-height: 120px; resize: vertical; }
+      .review-form input::placeholder, .review-form textarea::placeholder { color: rgba(255,255,255,.55); }
+      .rating-group { margin: 18px 0 14px; display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+      .rating-group span { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #dbc280; }
+      .stars { display: flex; align-items: center; gap: 6px; }
+      .star-btn { width: 34px; height: 34px; border: 1px solid rgba(204, 176, 112, .4); border-radius: 50%; background: transparent; color: #c7b38d; font-size: 18px; cursor: pointer; transition: transform .2s ease, background .2s ease, color .2s ease; }
+      .star-btn:hover, .star-btn.active { background: rgba(214, 170, 82, .12); color: #f3c15f; transform: translateY(-1px); }
+      .review-form .button { margin-top: 8px; border: none; cursor: pointer; }
       .contact { padding: 78px 24px; background: #1c1813; color: #fffaf0; text-align: center; }
       .contact .eyebrow { color: #d9bb79; }
       .contact h2 { margin: 16px 0 11px; }
@@ -156,6 +202,16 @@
         .poster-copy h2, .poster-copy > p { margin-left: auto; margin-right: auto; }
         .poster-copy .actions { justify-content: center; }
         .poster-frame { width: min(440px, 100%); margin: auto; }
+        .immersive-gallery { padding: 0 20px 72px; }
+        .gallery-grid { grid-template-columns: 1fr; }
+        .gallery-card, .gallery-card--tall, .gallery-card--wide { grid-column: auto; grid-row: auto; min-height: 260px; }
+        .review-station { padding: 0 20px 72px; }
+        .review-inner { grid-template-columns: 1fr; }
+        .review-copy { padding-top: 8px; text-align: center; }
+        .review-copy > p { margin-left: auto; margin-right: auto; }
+        .review-stats { grid-template-columns: 1fr; }
+        .review-form { padding: 18px 16px; }
+        .form-row { grid-template-columns: 1fr; }
         .contact { padding: 68px 20px; }
       }
 
@@ -179,6 +235,7 @@
         <div class="nav-links" id="nav-links">
           <a href="#scents">The scent bar</a>
           <a href="#about">Our story</a>
+          <a href="#reviews">Reviews</a>
           <a href="#poster">The poster</a>
           <a class="nav-cta" href="#contact">Get in touch</a>
         </div>
@@ -266,6 +323,124 @@
         </div>
       </section>
 
+      <section class="immersive-gallery" aria-label="Bosslady image gallery">
+        <div class="immersive-inner">
+          <div class="gallery-header">
+            <span class="eyebrow">Luxury in motion</span>
+            <h2>Our world, in every detail.</h2>
+          </div>
+
+          <div class="gallery-grid">
+            <figure class="gallery-card gallery-card--tall">
+              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.32.jpeg" alt="Bosslady product display with warm ambient lighting">
+              <figcaption class="gallery-overlay"><strong>Signature glow</strong><span>Warm luxury</span></figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.33.jpeg" alt="Luxury fragrance bottles arranged in a refined display">
+              <figcaption class="gallery-overlay"><strong>Pure elegance</strong><span>Minimal glamour</span></figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.34.jpeg" alt="Close-up of perfume bottle for the Bosslady scent collection">
+              <figcaption class="gallery-overlay"><strong>Bosslady mood</strong><span>Soft golden tones</span></figcaption>
+            </figure>
+            <figure class="gallery-card gallery-card--wide">
+              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.35.jpeg" alt="Scent bar styling with premium fragrance bottles and rich textures">
+              <figcaption class="gallery-overlay"><strong>Everyday luxury</strong><span>Built for your aura</span></figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.38.jpeg" alt="Fragrance detail close-up with feminine luxury styling">
+              <figcaption class="gallery-overlay"><strong>Golden finish</strong><span>Signature detail</span></figcaption>
+            </figure>
+            <figure class="gallery-card">
+              <img src="assets/1.jpeg" alt="Bosslady fragrance imagery for the scent bar collection">
+              <figcaption class="gallery-overlay"><strong>Fragrance notes</strong><span>Made to linger</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="review-station" id="reviews">
+        <div class="review-inner">
+          <div class="review-copy">
+            <span class="eyebrow">Review station</span>
+            <h2>What our clients are saying.</h2>
+            <p>Real fragrance love, from first spray to last impression. See why Bosslady is becoming every woman’s signature scent favourite.</p>
+            <ul class="review-stats" aria-label="Bosslady customer highlights">
+              <li><strong>4.9/5</strong><span>Average rating</span></li>
+              <li><strong>900+</strong><span>Happy reviews</span></li>
+              <li><strong>96%</strong><span>Would reorder</span></li>
+            </ul>
+          </div>
+
+          <div class="review-panel" aria-live="polite">
+            <div class="review-list" id="reviewList">
+              <article class="review-card">
+                <div class="review-top">
+                  <span class="review-author">Nandi M.</span>
+                  <span class="review-product">Bosslady</span>
+                </div>
+                <div class="review-stars" aria-label="5 star review">★★★★★</div>
+                <p>"It smells rich, feminine, and lasts all day. I get compliments every single time I wear it."</p>
+              </article>
+              <article class="review-card">
+                <div class="review-top">
+                  <span class="review-author">Lerato P.</span>
+                  <span class="review-product">Aura</span>
+                </div>
+                <div class="review-stars" aria-label="5 star review">★★★★★</div>
+                <p>"The scent is soft but memorable. It feels luxurious without being overpowering."</p>
+              </article>
+              <article class="review-card">
+                <div class="review-top">
+                  <span class="review-author">Zanele K.</span>
+                  <span class="review-product">Pure</span>
+                </div>
+                <div class="review-stars" aria-label="4 star review">★★★★☆</div>
+                <p>"Perfect for everyday wear. Clean, elegant, and exactly what I wanted from a signature scent."</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-form-wrap">
+          <form class="review-form" id="reviewForm">
+            <div class="form-row">
+              <label>
+                Your name
+                <input type="text" id="reviewerName" name="reviewerName" placeholder="Enter your name" required>
+              </label>
+              <label>
+                Product
+                <select id="reviewProduct" name="reviewProduct" required>
+                  <option value="">Select a scent</option>
+                  <option>Pure</option>
+                  <option>Aura</option>
+                  <option>Bosslady</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="rating-group">
+              <span>Rate your experience</span>
+              <div class="stars" aria-label="Choose a rating">
+                <button class="star-btn active" type="button" data-value="1" aria-label="1 star">★</button>
+                <button class="star-btn active" type="button" data-value="2" aria-label="2 stars">★</button>
+                <button class="star-btn active" type="button" data-value="3" aria-label="3 stars">★</button>
+                <button class="star-btn active" type="button" data-value="4" aria-label="4 stars">★</button>
+                <button class="star-btn active" type="button" data-value="5" aria-label="5 stars">★</button>
+              </div>
+            </div>
+
+            <label>
+              Your review
+              <textarea id="reviewMessage" name="reviewMessage" placeholder="Tell us what you loved about the product..." required></textarea>
+            </label>
+
+            <button class="button button-dark" type="submit">Submit review</button>
+          </form>
+        </div>
+      </section>
+
       <section class="contact" id="contact">
         <span class="eyebrow">Your next signature scent</span>
         <h2>Let’s find your fragrance.</h2>
@@ -284,6 +459,51 @@
     <script>
       const menuToggle = document.querySelector(".menu-toggle");
       const navLinks = document.querySelector(".nav-links");
+      const reviewForm = document.getElementById("reviewForm");
+      const reviewList = document.getElementById("reviewList");
+      const starButtons = [...document.querySelectorAll(".star-btn")];
+      let selectedRating = 5;
+
+      function updateStars(value) {
+        selectedRating = value;
+        starButtons.forEach((button) => {
+          const buttonValue = Number(button.dataset.value);
+          button.classList.toggle("active", buttonValue <= value);
+        });
+      }
+
+      starButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          updateStars(Number(button.dataset.value));
+        });
+      });
+
+      reviewForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const name = document.getElementById("reviewerName").value.trim();
+        const product = document.getElementById("reviewProduct").value;
+        const message = document.getElementById("reviewMessage").value.trim();
+
+        if (!name || !product || !message) {
+          return;
+        }
+
+        const article = document.createElement("article");
+        article.className = "review-card";
+        article.innerHTML = `
+          <div class="review-top">
+            <span class="review-author">${name}</span>
+            <span class="review-product">${product}</span>
+          </div>
+          <div class="review-stars" aria-label="${selectedRating} star review">${"★".repeat(selectedRating)}${"☆".repeat(5 - selectedRating)}</div>
+          <p>"${message}"</p>
+        `;
+
+        reviewList.prepend(article);
+        reviewForm.reset();
+        updateStars(5);
+      });
 
       menuToggle.addEventListener("click", () => {
         const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
