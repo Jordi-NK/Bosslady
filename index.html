@@ -115,15 +115,11 @@
       .immersive-inner { width: min(1100px, 100%); margin: auto; }
       .gallery-header { max-width: 620px; margin: 0 auto 34px; text-align: center; }
       .gallery-header .eyebrow { justify-content: center; }
-      .gallery-grid { display: grid; grid-template-columns: 1.05fr 1fr 1fr; gap: 18px; }
-      .gallery-card { position: relative; overflow: hidden; min-height: 300px; border-radius: 24px; box-shadow: 0 24px 50px rgba(38, 26, 18, .12); }
+      .gallery-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+      .gallery-card { aspect-ratio: 1; position: relative; overflow: hidden; margin: 0; border-radius: 14px; background: #e8dfd0; box-shadow: 0 12px 26px rgba(38, 26, 18, .1); }
       .gallery-card img { width: 100%; height: 100%; display: block; object-fit: cover; filter: saturate(1.05) contrast(1.04); transition: transform .5s ease; }
       .gallery-card:hover img { transform: scale(1.04); }
-      .gallery-card--tall { grid-row: span 2; min-height: 620px; }
-      .gallery-card--wide { grid-column: span 2; min-height: 290px; }
-      .gallery-overlay { position: absolute; inset: auto 0 0; padding: 22px 20px 18px; background: linear-gradient(180deg, rgba(17, 12, 10, 0), rgba(17, 12, 10, .82)); color: #f6edda; }
-      .gallery-overlay strong { display: block; margin-bottom: 4px; font-size: 16px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-      .gallery-overlay span { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.76); }
+      .gallery-caption { position: absolute; inset: auto 0 0; padding: 26px 13px 12px; background: linear-gradient(180deg, transparent, rgba(17, 12, 10, .72)); color: #f6edda; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
 
       .review-station { padding: 0 24px 90px; background: #f4eadc; }
       .review-inner { width: min(1100px, 100%); margin: auto; display: grid; grid-template-columns: .96fr 1.04fr; gap: 24px; align-items: start; }
@@ -156,6 +152,9 @@
       .star-btn { width: 34px; height: 34px; border: 1px solid rgba(204, 176, 112, .4); border-radius: 50%; background: transparent; color: #c7b38d; font-size: 18px; cursor: pointer; transition: transform .2s ease, background .2s ease, color .2s ease; }
       .star-btn:hover, .star-btn.active { background: rgba(214, 170, 82, .12); color: #f3c15f; transform: translateY(-1px); }
       .review-form .button { margin-top: 8px; border: none; cursor: pointer; }
+      .review-status { min-height: 20px; margin: 14px 0 0; color: #f0dfb8; font-size: 12px; line-height: 1.6; }
+      .review-whatsapp-link { margin-top: 12px; border-color: rgba(204, 176, 112, .6); color: #fffaf0; }
+      .review-whatsapp-link[hidden] { display: none; }
       .contact { padding: 78px 24px; background: #1c1813; color: #fffaf0; text-align: center; }
       .contact .eyebrow { color: #d9bb79; }
       .contact h2 { margin: 16px 0 11px; }
@@ -168,6 +167,10 @@
       .site-footer p { margin: 0; }
       .site-footer span { color: #cfad64; }
       :focus-visible { outline: 2px solid #b4873d; outline-offset: 4px; }
+
+      @media (max-width: 980px) {
+        .gallery-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+      }
 
       @media (max-width: 760px) {
         .announcement { font-size: 9px; }
@@ -202,17 +205,26 @@
         .poster-copy h2, .poster-copy > p { margin-left: auto; margin-right: auto; }
         .poster-copy .actions { justify-content: center; }
         .poster-frame { width: min(440px, 100%); margin: auto; }
-        .immersive-gallery { padding: 0 20px 72px; }
-        .gallery-grid { grid-template-columns: 1fr; }
-        .gallery-card, .gallery-card--tall, .gallery-card--wide { grid-column: auto; grid-row: auto; min-height: 260px; }
+        .immersive-gallery { padding: 0 20px 52px; }
+        .gallery-header { margin-bottom: 24px; }
+        .gallery-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+        .gallery-card { border-radius: 10px; }
+        .gallery-caption { padding: 18px 7px 7px; font-size: 7px; }
         .review-station { padding: 0 20px 72px; }
         .review-inner { grid-template-columns: 1fr; }
         .review-copy { padding-top: 8px; text-align: center; }
         .review-copy > p { margin-left: auto; margin-right: auto; }
-        .review-stats { grid-template-columns: 1fr; }
+        .review-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 20px; }
+        .review-stats li { padding: 12px 8px; }
+        .review-stats strong { font-size: clamp(18px, 5vw, 24px); }
+        .review-stats span { font-size: 8px; letter-spacing: .08em; }
         .review-form { padding: 18px 16px; }
         .form-row { grid-template-columns: 1fr; }
         .contact { padding: 68px 20px; }
+      }
+
+      @media (max-width: 480px) {
+        .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -327,34 +339,35 @@
         <div class="immersive-inner">
           <div class="gallery-header">
             <span class="eyebrow">Luxury in motion</span>
-            <h2>Our world, in every detail.</h2>
+            <h2>Our collection, in every detail.</h2>
           </div>
 
           <div class="gallery-grid">
-            <figure class="gallery-card gallery-card--tall">
-              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.32.jpeg" alt="Bosslady product display with warm ambient lighting">
-              <figcaption class="gallery-overlay"><strong>Signature glow</strong><span>Warm luxury</span></figcaption>
-            </figure>
-            <figure class="gallery-card">
-              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.33.jpeg" alt="Luxury fragrance bottles arranged in a refined display">
-              <figcaption class="gallery-overlay"><strong>Pure elegance</strong><span>Minimal glamour</span></figcaption>
-            </figure>
-            <figure class="gallery-card">
-              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.34.jpeg" alt="Close-up of perfume bottle for the Bosslady scent collection">
-              <figcaption class="gallery-overlay"><strong>Bosslady mood</strong><span>Soft golden tones</span></figcaption>
-            </figure>
-            <figure class="gallery-card gallery-card--wide">
-              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.35.jpeg" alt="Scent bar styling with premium fragrance bottles and rich textures">
-              <figcaption class="gallery-overlay"><strong>Everyday luxury</strong><span>Built for your aura</span></figcaption>
-            </figure>
-            <figure class="gallery-card">
-              <img src="assets/WhatsApp Image 2026-10-24 at 15.30.38.jpeg" alt="Fragrance detail close-up with feminine luxury styling">
-              <figcaption class="gallery-overlay"><strong>Golden finish</strong><span>Signature detail</span></figcaption>
-            </figure>
-            <figure class="gallery-card">
-              <img src="assets/1.jpeg" alt="Bosslady fragrance imagery for the scent bar collection">
-              <figcaption class="gallery-overlay"><strong>Fragrance notes</strong><span>Made to linger</span></figcaption>
-            </figure>
+            <figure class="gallery-card"><img src="assets/1.jpeg" alt="Bosslady Cosmetics products, photo 1" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 01</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/2.jpeg" alt="Bosslady Cosmetics products, photo 2" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 02</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/3.jpeg" alt="Bosslady Cosmetics products, photo 3" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 03</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/4.jpeg" alt="Bosslady Cosmetics products, photo 4" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 04</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/5.jpeg" alt="Bosslady Cosmetics products, photo 5" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 05</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/6.jpeg" alt="Bosslady Cosmetics products, photo 6" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 06</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/7.jpeg" alt="Bosslady Cosmetics products, photo 7" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 07</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/8.jpeg" alt="Bosslady Cosmetics products, photo 8" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 08</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/9.jpeg" alt="Bosslady Cosmetics products, photo 9" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 09</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/10.jpeg" alt="Bosslady Cosmetics products, photo 10" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 10</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/11.jpeg" alt="Bosslady Cosmetics products, photo 11" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 11</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/23.jpeg" alt="Bosslady Cosmetics products, photo 12" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 12</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/234.jpeg" alt="Bosslady Cosmetics products, photo 13" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 13</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/323.jpeg" alt="Bosslady Cosmetics products, photo 14" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 14</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/1111.jpeg" alt="Bosslady Cosmetics products, photo 15" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 15</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/3234.jpeg" alt="Bosslady Cosmetics products, photo 16" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 16</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/WhatsApp Image 2026-10-24 at 15.30.3jjj.jpeg" alt="Bosslady Cosmetics products, photo 17" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 17</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/WhatsApp Image 2026-10-24 at 15.30.32.jpeg" alt="Bosslady Cosmetics products, photo 18" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 18</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/WhatsApp Image 2026-10-24 at 15.30.33.jpeg" alt="Bosslady Cosmetics products, photo 19" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 19</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/WhatsApp Image 2026-10-24 at 15.30.34.jpeg" alt="Bosslady Cosmetics products, photo 20" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 20</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/WhatsApp Image 2026-10-24 at 15.30.35.jpeg" alt="Bosslady Cosmetics products, photo 21" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 21</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/WhatsApp Image 2026-10-24 at 15.30.38.jpeg" alt="Bosslady Cosmetics products, photo 22" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 22</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/f.jpeg" alt="Bosslady Cosmetics products, photo 23" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 23</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/faf.jpeg" alt="Bosslady Cosmetics products, photo 24" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 24</figcaption></figure>
+            <figure class="gallery-card"><img src="assets/4343.jpeg" alt="Bosslady Cosmetics products, photo 25" loading="lazy" decoding="async"><figcaption class="gallery-caption">Collection photo 25</figcaption></figure>
           </div>
         </div>
       </section>
@@ -364,7 +377,7 @@
           <div class="review-copy">
             <span class="eyebrow">Review station</span>
             <h2>What our clients are saying.</h2>
-            <p>Real fragrance love, from first spray to last impression. See why Bosslady is becoming every woman’s signature scent favourite.</p>
+            <p>Share your experience with a scent, leave a rating and comment, and send it straight to Bosslady on WhatsApp.</p>
             <ul class="review-stats" aria-label="Bosslady customer highlights">
               <li><strong>4.9/5</strong><span>Average rating</span></li>
               <li><strong>900+</strong><span>Happy reviews</span></li>
@@ -407,7 +420,7 @@
             <div class="form-row">
               <label>
                 Your name
-                <input type="text" id="reviewerName" name="reviewerName" placeholder="Enter your name" required>
+                <input type="text" id="reviewerName" name="reviewerName" placeholder="Enter your name" maxlength="60" required>
               </label>
               <label>
                 Product
@@ -423,20 +436,22 @@
             <div class="rating-group">
               <span>Rate your experience</span>
               <div class="stars" aria-label="Choose a rating">
-                <button class="star-btn active" type="button" data-value="1" aria-label="1 star">★</button>
-                <button class="star-btn active" type="button" data-value="2" aria-label="2 stars">★</button>
-                <button class="star-btn active" type="button" data-value="3" aria-label="3 stars">★</button>
-                <button class="star-btn active" type="button" data-value="4" aria-label="4 stars">★</button>
-                <button class="star-btn active" type="button" data-value="5" aria-label="5 stars">★</button>
+                <button class="star-btn active" type="button" data-value="1" aria-label="1 star" aria-pressed="true">★</button>
+                <button class="star-btn active" type="button" data-value="2" aria-label="2 stars" aria-pressed="true">★</button>
+                <button class="star-btn active" type="button" data-value="3" aria-label="3 stars" aria-pressed="true">★</button>
+                <button class="star-btn active" type="button" data-value="4" aria-label="4 stars" aria-pressed="true">★</button>
+                <button class="star-btn active" type="button" data-value="5" aria-label="5 stars" aria-pressed="true">★</button>
               </div>
             </div>
 
             <label>
               Your review
-              <textarea id="reviewMessage" name="reviewMessage" placeholder="Tell us what you loved about the product..." required></textarea>
+              <textarea id="reviewMessage" name="reviewMessage" placeholder="Tell us what you loved about the product..." maxlength="1000" required></textarea>
             </label>
 
-            <button class="button button-dark" type="submit">Submit review</button>
+            <button class="button button-dark" type="submit">Continue to WhatsApp</button>
+            <p class="review-status" id="reviewStatus" role="status" aria-live="polite"></p>
+            <a class="button button-outline review-whatsapp-link" id="reviewWhatsAppLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open review in WhatsApp</a>
           </form>
         </div>
       </section>
@@ -460,7 +475,8 @@
       const menuToggle = document.querySelector(".menu-toggle");
       const navLinks = document.querySelector(".nav-links");
       const reviewForm = document.getElementById("reviewForm");
-      const reviewList = document.getElementById("reviewList");
+      const reviewStatus = document.getElementById("reviewStatus");
+      const reviewWhatsAppLink = document.getElementById("reviewWhatsAppLink");
       const starButtons = [...document.querySelectorAll(".star-btn")];
       let selectedRating = 5;
 
@@ -469,6 +485,7 @@
         starButtons.forEach((button) => {
           const buttonValue = Number(button.dataset.value);
           button.classList.toggle("active", buttonValue <= value);
+          button.setAttribute("aria-pressed", String(buttonValue <= value));
         });
       }
 
@@ -486,21 +503,23 @@
         const message = document.getElementById("reviewMessage").value.trim();
 
         if (!name || !product || !message) {
+          reviewStatus.textContent = "Please enter your name, select a scent, and add a comment.";
           return;
         }
 
-        const article = document.createElement("article");
-        article.className = "review-card";
-        article.innerHTML = `
-          <div class="review-top">
-            <span class="review-author">${name}</span>
-            <span class="review-product">${product}</span>
-          </div>
-          <div class="review-stars" aria-label="${selectedRating} star review">${"★".repeat(selectedRating)}${"☆".repeat(5 - selectedRating)}</div>
-          <p>"${message}"</p>
-        `;
+        const reviewText = [
+          "Hi Bosslady, I would like to share a review.",
+          `Name: ${name}`,
+          `Product: ${product}`,
+          `Rating: ${selectedRating}/5`,
+          `Comment: ${message}`
+        ].join("\n");
+        const whatsappUrl = `https://wa.me/27673951408?text=${encodeURIComponent(reviewText)}`;
 
-        reviewList.prepend(article);
+        reviewWhatsAppLink.href = whatsappUrl;
+        reviewWhatsAppLink.hidden = false;
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+        reviewStatus.textContent = "Your review is ready in WhatsApp. Tap Send there to share it with Bosslady.";
         reviewForm.reset();
         updateStars(5);
       });
