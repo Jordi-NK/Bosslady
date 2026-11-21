@@ -1,0 +1,6 @@
+.git/
+.vercel/
+node_modules/
+data/
+server.js
+README.md
