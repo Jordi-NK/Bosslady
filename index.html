@@ -138,6 +138,7 @@
       .review-product { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #7d5b27; }
       .review-stars { color: #d8a94f; letter-spacing: 2px; font-size: 12px; }
       .review-card p { margin: 0; color: #544e46; font-size: 13px; line-height: 1.7; }
+      .review-empty { margin: 0; padding: 18px; color: var(--muted); font-size: 13px; line-height: 1.7; text-align: center; }
 
       .review-form-wrap { width: min(1100px, 100%); margin: 28px auto 0; }
       .review-form { padding: 22px 24px; border-radius: 24px; background: #1a1410; color: #f4efe8; box-shadow: 0 24px 46px rgba(30, 22, 15, .18); }
@@ -153,8 +154,6 @@
       .star-btn:hover, .star-btn.active { background: rgba(214, 170, 82, .12); color: #f3c15f; transform: translateY(-1px); }
       .review-form .button { margin-top: 8px; border: none; cursor: pointer; }
       .review-status { min-height: 20px; margin: 14px 0 0; color: #f0dfb8; font-size: 12px; line-height: 1.6; }
-      .review-whatsapp-link { margin-top: 12px; border-color: rgba(204, 176, 112, .6); color: #fffaf0; }
-      .review-whatsapp-link[hidden] { display: none; }
       .contact { padding: 78px 24px; background: #1c1813; color: #fffaf0; text-align: center; }
       .contact .eyebrow { color: #d9bb79; }
       .contact h2 { margin: 16px 0 11px; }
@@ -377,40 +376,17 @@
           <div class="review-copy">
             <span class="eyebrow">Review station</span>
             <h2>What our clients are saying.</h2>
-            <p>Share your experience with a scent, leave a rating and comment, and send it straight to Bosslady on WhatsApp.</p>
+            <p>Share your experience with a scent. Your review is saved here for everyone to read.</p>
             <ul class="review-stats" aria-label="Bosslady customer highlights">
-              <li><strong>4.9/5</strong><span>Average rating</span></li>
-              <li><strong>900+</strong><span>Happy reviews</span></li>
-              <li><strong>96%</strong><span>Would reorder</span></li>
+              <li><strong id="averageRating">0.0</strong><span>Average rating</span></li>
+              <li><strong id="reviewCount">0</strong><span>Reviews</span></li>
+              <li><strong id="fiveStarCount">0</strong><span>5-star reviews</span></li>
             </ul>
           </div>
 
           <div class="review-panel" aria-live="polite">
-            <div class="review-list" id="reviewList">
-              <article class="review-card">
-                <div class="review-top">
-                  <span class="review-author">Nandi M.</span>
-                  <span class="review-product">Bosslady</span>
-                </div>
-                <div class="review-stars" aria-label="5 star review">★★★★★</div>
-                <p>"It smells rich, feminine, and lasts all day. I get compliments every single time I wear it."</p>
-              </article>
-              <article class="review-card">
-                <div class="review-top">
-                  <span class="review-author">Lerato P.</span>
-                  <span class="review-product">Aura</span>
-                </div>
-                <div class="review-stars" aria-label="5 star review">★★★★★</div>
-                <p>"The scent is soft but memorable. It feels luxurious without being overpowering."</p>
-              </article>
-              <article class="review-card">
-                <div class="review-top">
-                  <span class="review-author">Zanele K.</span>
-                  <span class="review-product">Pure</span>
-                </div>
-                <div class="review-stars" aria-label="4 star review">★★★★☆</div>
-                <p>"Perfect for everyday wear. Clean, elegant, and exactly what I wanted from a signature scent."</p>
-              </article>
+            <div class="review-list" id="reviewList" aria-live="polite">
+              <p class="review-empty">Loading reviews...</p>
             </div>
           </div>
         </div>
@@ -449,9 +425,8 @@
               <textarea id="reviewMessage" name="reviewMessage" placeholder="Tell us what you loved about the product..." maxlength="1000" required></textarea>
             </label>
 
-            <button class="button button-dark" type="submit">Continue to WhatsApp</button>
+            <button class="button button-dark" type="submit">Post your review</button>
             <p class="review-status" id="reviewStatus" role="status" aria-live="polite"></p>
-            <a class="button button-outline review-whatsapp-link" id="reviewWhatsAppLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open review in WhatsApp</a>
           </form>
         </div>
       </section>
@@ -476,9 +451,14 @@
       const navLinks = document.querySelector(".nav-links");
       const reviewForm = document.getElementById("reviewForm");
       const reviewStatus = document.getElementById("reviewStatus");
-      const reviewWhatsAppLink = document.getElementById("reviewWhatsAppLink");
+      const reviewList = document.getElementById("reviewList");
+      const averageRating = document.getElementById("averageRating");
+      const reviewCount = document.getElementById("reviewCount");
+      const fiveStarCount = document.getElementById("fiveStarCount");
       const starButtons = [...document.querySelectorAll(".star-btn")];
+      const submitButton = reviewForm.querySelector('button[type="submit"]');
       let selectedRating = 5;
+      let reviews = [];
 
       function updateStars(value) {
         selectedRating = value;
@@ -495,7 +475,72 @@
         });
       });
 
-      reviewForm.addEventListener("submit", (event) => {
+      function createReviewCard(review) {
+        const card = document.createElement("article");
+        card.className = "review-card";
+
+        const top = document.createElement("div");
+        top.className = "review-top";
+        const author = document.createElement("span");
+        author.className = "review-author";
+        author.textContent = review.name;
+        const product = document.createElement("span");
+        product.className = "review-product";
+        product.textContent = review.product;
+        top.append(author, product);
+
+        const stars = document.createElement("div");
+        stars.className = "review-stars";
+        stars.setAttribute("aria-label", `${review.rating} star review`);
+        stars.textContent = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
+
+        const message = document.createElement("p");
+        message.textContent = review.message;
+        card.append(top, stars, message);
+        return card;
+      }
+
+      function renderReviews() {
+        reviewList.textContent = "";
+        if (reviews.length === 0) {
+          const emptyMessage = document.createElement("p");
+          emptyMessage.className = "review-empty";
+          emptyMessage.textContent = "Be the first to leave a review.";
+          reviewList.append(emptyMessage);
+        } else {
+          reviews.forEach((review) => reviewList.append(createReviewCard(review)));
+        }
+
+        const total = reviews.length;
+        const ratingTotal = reviews.reduce((sum, review) => sum + review.rating, 0);
+        averageRating.textContent = total ? (ratingTotal / total).toFixed(1) : "0.0";
+        reviewCount.textContent = String(total);
+        fiveStarCount.textContent = String(reviews.filter((review) => review.rating === 5).length);
+      }
+
+      async function loadReviews() {
+        try {
+          const response = await fetch("/api/reviews");
+          if (!response.ok) {
+            throw new Error(`Review request failed with status ${response.status}`);
+          }
+          const savedReviews = await response.json();
+          if (!Array.isArray(savedReviews)) {
+            throw new Error("The reviews response was not a list");
+          }
+          reviews = savedReviews;
+          renderReviews();
+        } catch (error) {
+          console.error("Could not load reviews:", error);
+          reviewList.textContent = "";
+          const errorMessage = document.createElement("p");
+          errorMessage.className = "review-empty";
+          errorMessage.textContent = "Reviews could not be loaded. Please try again later.";
+          reviewList.append(errorMessage);
+        }
+      }
+
+      reviewForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const name = document.getElementById("reviewerName").value.trim();
@@ -507,21 +552,30 @@
           return;
         }
 
-        const reviewText = [
-          "Hi Bosslady, I would like to share a review.",
-          `Name: ${name}`,
-          `Product: ${product}`,
-          `Rating: ${selectedRating}/5`,
-          `Comment: ${message}`
-        ].join("\n");
-        const whatsappUrl = `https://wa.me/27673951408?text=${encodeURIComponent(reviewText)}`;
+        submitButton.disabled = true;
+        reviewStatus.textContent = "Saving your review...";
+        try {
+          const response = await fetch("/api/reviews", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, product, rating: selectedRating, message })
+          });
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(result.error || `Review request failed with status ${response.status}`);
+          }
 
-        reviewWhatsAppLink.href = whatsappUrl;
-        reviewWhatsAppLink.hidden = false;
-        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-        reviewStatus.textContent = "Your review is ready in WhatsApp. Tap Send there to share it with Bosslady.";
-        reviewForm.reset();
-        updateStars(5);
+          reviews.unshift(result.review);
+          renderReviews();
+          reviewForm.reset();
+          updateStars(5);
+          reviewStatus.textContent = "Thank you! Your review has been posted.";
+        } catch (error) {
+          console.error("Could not save review:", error);
+          reviewStatus.textContent = "Your review could not be saved. Please try again.";
+        } finally {
+          submitButton.disabled = false;
+        }
       });
 
       menuToggle.addEventListener("click", () => {
@@ -538,6 +592,8 @@
           navLinks.classList.remove("is-open");
         }
       });
+
+      loadReviews();
     </script>
   </body>
 </html>

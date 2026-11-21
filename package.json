@@ -1,0 +1,9 @@
+{
+  "name": "bosslady-cosmetics-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bosslady Cosmetics website with shared persistent customer reviews",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
